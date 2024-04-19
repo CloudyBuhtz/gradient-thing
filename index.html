@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gradient Thing</title>
+  <script src="https://pixijs.download/release/pixi.js"></script>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    html {
+      font-family: system-ui, sans-serif;
+      font-weight: normal;
+    }
+
+    .container {
+      display: grid;
+      justify-content: center;
+      align-content: center;
+      width: 100svw;
+      height: 100svh;
+      background-color: #777;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: column;
+      grid-area: 2/1/2/1;
+      padding: 2rem;
+      gap: 1rem;
+    }
+
+    .controls label {
+      margin-bottom: -1rem;
+    }
+
+    .info {
+      grid-area: 2/3/2/3;
+      padding: 1rem;
+    }
+
+    canvas {
+      border: 4px solid #000;
+      grid-area: 2/2/2/2;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="controls">
+      <label for="texture">Texture File:</label>
+      <input type="file" name="texture" id="texture" accept="image/png">
+      <label for="min">Minimum Shape Size</label>
+      <input type="number" name="min" id="min" value="32">
+      <label for="max">Maximum Shape Size</label>
+      <input type="number" name="max" id="max" value="512">
+      <label for="num">Number of Shapes</label>
+      <input type="number" name="num" id="num" value="512">
+      <input type="button" value="Generate" id="generate">
+    </div>
+    <div class="info">
+      <h2 id="how-to-use">How to use</h2>
+      <p>Get yourself an image, preferably something without much internal geometry. Make sure it&#39;s white and on a
+        transparent background.<br>
+        <a href="star.png">[Example Good Image]</a><br>
+        <a href="colonthree.png">[Example Wonky Image]</a><br><br>
+      </p>
+      <p>Use the three numbers to adjust how smooth and the start / end size of the shape to how you&#39;d like it and
+        then use a screenshot tool to capture it once you&#39;re done.</p>
+      <br>
+      <h3 id="min-shape-size">Min Shape Size</h3>
+      <p>This is the minimum size of the shape, setting it too small can make the colours pretty messed up so just bump
+        it up a bit.</p>
+      <br>
+      <h3 id="max-shape-size">Max Shape Size</h3>
+      <p>This is the maximum size the shape will be, depending on the shape you might need to make it lower or higher to
+        fill the entire texture.</p>
+      <br>
+      <h3 id="number-of-shapes">Number of Shapes</h2>
+        <p>This dictates how many shapes it stacks on top of one another, this can be used to make a less or more smooth
+          image.<br><br>
+          Anything over 255 (the number of greyscale colors) may be unnecessary.<br><br>
+          Anything way over may just break the whole thing / make your GPU unhappy rendering thousands of sprites on a
+          webpage.</p>
+    </div>
+  </div>
+  <script type="module" src="index.js"></script>
+</body>
+
+</html>
