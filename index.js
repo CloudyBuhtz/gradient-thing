@@ -1,12 +1,7 @@
 const getColor = (num) => {
-  if (num > 1 || num < 0) {
-    console.warn("goofed", num);
-  }
-  const i = Math.round(num * 255).toString(16);
-  if (i > 255 || i < 0) {
-    console.warn("wonky", i);
-  }
-  const color = Number.parseInt("0x" + i + i + i);
+  let i = Math.round(num * 255).toString(16);
+  i = i.padStart(2, "0");
+  const color = Number.parseInt(`0x${i}${i}${i}`);
   return color;
 };
 
@@ -24,12 +19,7 @@ const generateShape = (min, max, num, texture, app) => {
     star.x = app.renderer.width / 2;
     star.y = app.renderer.height / 2;
 
-    star.setSize(i, i);
-    const color = getColor(i / max);
-    if (color > 0xffffff) {
-      console.warn("funky", color);
-    }
-    star.tint = color;
+    star.tint = getColor(i / max);
 
     app.stage.addChild(star);
   }
@@ -49,7 +39,6 @@ document.querySelector("#texture").addEventListener("change", async () => {
   const text_image = document.querySelector("#texture").files[0];
   if (text_image) {
     const blob = URL.createObjectURL(text_image);
-    console.log(blob);
     texture = await PIXI.Assets.load({ src: blob, loadParser: "loadTextures" });
   }
 });
